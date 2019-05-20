@@ -15,6 +15,7 @@ public class EmailTest {
         EmailDetails emailDetails = EmailDetails.builder()
                 .from("jacobodsinada")
                 .to("jodsi")
+                .to("Hello <j@odsinad.com>")
                 .cc("jallll")
                 .bcc("jallll")
                 .build();

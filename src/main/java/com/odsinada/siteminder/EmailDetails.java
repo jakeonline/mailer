@@ -1,12 +1,16 @@
 package com.odsinada.siteminder;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.Singular;
 
 import javax.validation.constraints.Email;
 import java.util.List;
 
 @Builder
+@Getter
+@Setter
 public class EmailDetails {
 
     @Email(message = "{user.email.invalid}")
@@ -22,5 +26,7 @@ public class EmailDetails {
     List<@Email(message = "{user.email.invalid}") String> bcc;
 
     String body;
+
+    String subject;
 
 }
