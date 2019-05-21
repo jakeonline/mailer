@@ -21,7 +21,11 @@ public class SendGridEmailProvider implements EmailProvider {
     private static final String API_KEY = "";
     private static final String SENDGRID_URL = "https://api.sendgrid.com/v3/mail/send";
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper;
+
+    public SendGridEmailProvider(ObjectMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public boolean send(EmailDetails email) {

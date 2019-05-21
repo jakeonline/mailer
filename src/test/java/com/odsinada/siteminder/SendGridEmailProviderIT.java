@@ -1,5 +1,6 @@
 package com.odsinada.siteminder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class SendGridEmailProviderIT {
 
     @Before
     public void setup() {
-        provider = new SendGridEmailProvider();
+        provider = new SendGridEmailProvider(new ObjectMapper());
     }
 
     @Test

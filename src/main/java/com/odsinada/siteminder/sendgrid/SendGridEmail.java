@@ -10,7 +10,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "personalizations",
-    "buildSendGridEmail",
+    "from",
     "subject",
     "content"
 })
@@ -19,7 +19,7 @@ public class SendGridEmail {
 
     @JsonProperty("personalizations")
     public List<Personalization> personalizations = null;
-    @JsonProperty("buildSendGridEmail")
+    @JsonProperty("from")
     public From from;
     @JsonProperty("subject")
     public String subject;
