@@ -1,4 +1,4 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

@@ -1,9 +1,6 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import java.util.List;
@@ -11,6 +8,8 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmailDetails {
 
     @Email(message = "{user.email.invalid}")

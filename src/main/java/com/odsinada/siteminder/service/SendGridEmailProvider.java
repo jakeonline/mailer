@@ -1,4 +1,4 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,10 +11,11 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-
+@Service
 @Slf4j
 public class SendGridEmailProvider implements EmailProvider {
 

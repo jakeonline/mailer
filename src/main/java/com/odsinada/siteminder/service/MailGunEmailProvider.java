@@ -1,4 +1,4 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Consts;
@@ -11,9 +11,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+@Service
 @Slf4j
 public class MailGunEmailProvider implements EmailProvider {
 

@@ -1,6 +1,5 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,26 +8,26 @@ import java.time.LocalDateTime;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class SendGridEmailProviderIT {
+public class MailGunEmailProviderIT {
 
-    private SendGridEmailProvider provider;
+    private MailGunEmailProvider provider;
 
     @Before
     public void setup() {
-        provider = new SendGridEmailProvider(new ObjectMapper());
+        provider = new MailGunEmailProvider();
     }
 
     @Test
     public void shouldSendMail() {
         // arrange
         EmailDetails email = EmailDetails.builder()
-                .from("jacob@odsinada.com")
+                .from("MailGun <mailgun@sandbox16ae66a08f7b486eb121269181144231.mailgun.org>")
                 .to("jacob@odsinada.com")
                 .to("abigail@odsinada.com")
                 .cc("jake@odsinada.com")
                 .bcc("jake.odsinada@gmail.com")
-                .subject("SendGrip test - " + LocalDateTime.now())
-                .body("SendGrip API hello!")
+                .subject("Test mail - " + LocalDateTime.now())
+                .body("Hello World!")
                 .build();
 
         // act

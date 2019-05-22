@@ -1,6 +1,7 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
 
 import com.odsinada.siteminder.sendgrid.*;
+import com.odsinada.siteminder.web.EmailDTO;
 import org.apache.http.NameValuePair;
 import org.apache.http.entity.ContentType;
 import org.apache.http.message.BasicNameValuePair;
@@ -9,20 +10,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.odsinada.siteminder.MailGunEmailProvider.*;
-
 public class EmailUtil {
 
     public static List<NameValuePair> buildMailGunParams(EmailDetails email) {
         List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair(FIELD_FROM, email.getFrom()));
+        params.add(new BasicNameValuePair(MailGunEmailProvider.FIELD_FROM, email.getFrom()));
 
-        email.getTo().forEach(toRecipient -> params.add(new BasicNameValuePair(FIELD_TO, toRecipient)));
-        email.getCc().forEach(ccRecipient -> params.add(new BasicNameValuePair(FIELD_CC, ccRecipient)));
-        email.getBcc().forEach(bccRecipient -> params.add(new BasicNameValuePair(FIELD_BCC, bccRecipient)));
+        email.getTo().forEach(toRecipient -> params.add(new BasicNameValuePair(MailGunEmailProvider.FIELD_TO, toRecipient)));
+        email.getCc().forEach(ccRecipient -> params.add(new BasicNameValuePair(MailGunEmailProvider.FIELD_CC, ccRecipient)));
+        email.getBcc().forEach(bccRecipient -> params.add(new BasicNameValuePair(MailGunEmailProvider.FIELD_BCC, bccRecipient)));
 
-        params.add(new BasicNameValuePair(FIELD_SUBJECT, email.getSubject()));
-        params.add(new BasicNameValuePair(FIELD_TEXT, email.getBody()));
+        params.add(new BasicNameValuePair(MailGunEmailProvider.FIELD_SUBJECT, email.getSubject()));
+        params.add(new BasicNameValuePair(MailGunEmailProvider.FIELD_TEXT, email.getBody()));
         return params;
     }
 
@@ -57,4 +56,14 @@ public class EmailUtil {
                 .build();
     }
 
+    public static EmailDetails toEntity(EmailDTO emailDTO) {
+        EmailDetails emailDetails = new EmailDetails();
+        emailDetails.setFrom(emailDTO.getFrom());
+        emailDetails.setTo(emailDTO.getTo());
+        emailDetails.setCc(emailDTO.getCc());
+        emailDetails.setBcc(emailDTO.getBcc());
+        emailDetails.setSubject(emailDTO.getSubject());
+        emailDetails.setBody(emailDTO.getBody());
+        return emailDetails;
+    }
 }

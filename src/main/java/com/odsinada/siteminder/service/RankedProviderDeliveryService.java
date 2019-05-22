@@ -1,13 +1,17 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
 import java.util.List;
 
+@Service
 public class RankedProviderDeliveryService implements MailDeliveryService {
 
     private final List<EmailProvider> providers;
 
-    public RankedProviderDeliveryService(List<EmailProvider> providers) {
+    public RankedProviderDeliveryService(@Autowired List<EmailProvider> providers) {
         this.providers = providers;
     }
 

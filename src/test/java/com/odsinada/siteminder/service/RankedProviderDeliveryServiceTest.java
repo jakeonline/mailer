@@ -1,4 +1,4 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +20,9 @@ public class RankedProviderDeliveryServiceTest {
 
     @Mock
     private EmailProvider providerA, providerB, providerC;
-    
+
     @Before
-    public void setup(){
+    public void setup() {
         List<EmailProvider> providers = Arrays.asList(providerA, providerB, providerC);
         service = new RankedProviderDeliveryService(providers);
     }

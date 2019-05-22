@@ -1,4 +1,4 @@
-package com.odsinada.siteminder;
+package com.odsinada.siteminder.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,18 +11,14 @@ import javax.validation.Validator;
 import java.util.HashSet;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MailProcessorTest
-{
-    private MailProcessor processor;
-
+public class MailProcessorTest {
     @Mock
     EmailDetails input;
-
+    private MailProcessor processor;
     @Mock
     private Output output;
     @Mock
@@ -48,6 +44,7 @@ public class MailProcessorTest
         Output output = processor.process(input);
 
         // assert
+        assertThat(output.getResource(), notNullValue());
         assertThat(output.getErrors().isEmpty(), equalTo(true));
         verify(mailDeliveryService).send(input);
     }
