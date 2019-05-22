@@ -60,6 +60,7 @@ public class MailProcessorTest {
         Output output = processor.process(input);
 
         // assert
+        assertThat(output.getResource(), nullValue());
         assertThat(output.getErrors().isEmpty(), equalTo(false));
         assertThat(output.getErrors(), hasItem(("has violationA")));
         verify(mailDeliveryService, times(0)).send(input);
@@ -75,6 +76,7 @@ public class MailProcessorTest {
         Output output = processor.process(input);
 
         // assert
+        assertThat(output.getResource(), notNullValue());
         assertThat(output.getErrors().isEmpty(), equalTo(true));
         assertThat(output.getFailures().isEmpty(), equalTo(false));
     }

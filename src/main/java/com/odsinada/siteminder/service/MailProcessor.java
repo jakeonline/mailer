@@ -31,10 +31,10 @@ public class MailProcessor {
         } else {
             try {
                 mailDeliveryService.send(input);
-                output.setResource(createUniqueResource());
             } catch (MailDeliveryException mde) {
                 output.getFailures().add(MSG_FAILED_SENDING_EMAIL);
             }
+            output.setResource(createUniqueResource());
         }
 
         return output;
