@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class EmailControllerTest {
 
+    public static final String API_CONTEXT = EmailController.API_ROOT + "/";
     EmailController controller;
     String resourceUrl = "someResourceUrl";
     @Mock
@@ -53,7 +54,7 @@ public class EmailControllerTest {
 
         // assert
         assertThat(emailSummaryDTO.getStatusCode(), equalTo(HttpStatus.CREATED));
-        assertThat(emailSummaryDTO.getBody().getSelf(), equalTo(resourceUrl));
+        assertThat(emailSummaryDTO.getBody().getSelf(), equalTo(API_CONTEXT + resourceUrl));
         assertThat(emailSummaryDTO.getBody().getErrors(), is(empty()));
 
     }
@@ -62,7 +63,6 @@ public class EmailControllerTest {
     public void shouldNotSendMailAndReturnBadRequestStatus() throws URISyntaxException {
         // arrange
         when(processor.process(any())).thenReturn(output);
-        when(output.getResource()).thenReturn(resourceUrl);
 
         List<String> errors = Arrays.asList("Error 1");
         when(output.getErrors()).thenReturn(errors);
@@ -72,7 +72,7 @@ public class EmailControllerTest {
 
         // assert
         assertThat(emailSummaryDTO.getStatusCode(), equalTo(HttpStatus.BAD_REQUEST));
-        assertThat(emailSummaryDTO.getBody().getSelf(), equalTo(resourceUrl));
+        assertThat(emailSummaryDTO.getBody().getSelf(), nullValue());
         assertThat(emailSummaryDTO.getBody().getErrors(), is(not(empty())));
     }
 
@@ -90,7 +90,7 @@ public class EmailControllerTest {
 
         // assert
         assertThat(emailSummaryDTO.getStatusCode(), equalTo(HttpStatus.BAD_GATEWAY));
-        assertThat(emailSummaryDTO.getBody().getSelf(), equalTo(resourceUrl));
+        assertThat(emailSummaryDTO.getBody().getSelf(), equalTo(API_CONTEXT + resourceUrl));
         assertThat(emailSummaryDTO.getBody().getErrors(), is(empty()));
     }
 

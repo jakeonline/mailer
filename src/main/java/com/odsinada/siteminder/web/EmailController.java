@@ -14,8 +14,10 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 
 @RestController
-@RequestMapping("/v1/email")
+@RequestMapping(EmailController.API_ROOT)
 public class EmailController {
+
+    public static final String API_ROOT = "/v1/email";
 
     @Autowired
     private MailProcessor processor;
@@ -38,8 +40,9 @@ public class EmailController {
 
         Output output = processor.process(emailDetails);
 
+        String self = output.getErrors().isEmpty() ? API_ROOT + "/" + output.getResource() : null;
         EmailSummaryDTO emailSummaryDTO = EmailSummaryDTO.builder()
-                .self(output.getResource())
+                .self(self)
                 .errors(output.getErrors())
                 .build();
 
