@@ -36,7 +36,7 @@ java -jar mailer-1.0-SNAPSHOT.jar
   "body": "Hello World!"
 }
 ```
-3. Alternatively, this is hosted in http://13.55.2.204:8080/v1/email
+3. Alternatively, this is hosted in http://54.206.114.22:8080/v1/email
 
 ### Improvements
 1. Retry mechanism. Implement logic to retry (to a certain time limit) the synchronous API calls to email providers. Further improvement in #6.
