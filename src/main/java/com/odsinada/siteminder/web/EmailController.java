@@ -40,7 +40,7 @@ public class EmailController {
 
         Output output = processor.process(emailDetails);
 
-        String self = output.getErrors().isEmpty() ? API_ROOT + "/" + output.getResource() : null;
+        String self = isSuccessful(output) ? API_ROOT + "/" + output.getResource() : "";
         EmailSummaryDTO emailSummaryDTO = EmailSummaryDTO.builder()
                 .self(self)
                 .errors(output.getErrors())
@@ -55,6 +55,10 @@ public class EmailController {
         }
 
         return ResponseEntity.created(new URI(output.getResource())).body(emailSummaryDTO);
+    }
+
+    private boolean isSuccessful(Output output) {
+        return output.getErrors().isEmpty() && output.getFailures().isEmpty();
     }
 
 }

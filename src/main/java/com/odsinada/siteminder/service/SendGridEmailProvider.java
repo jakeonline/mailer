@@ -50,7 +50,7 @@ public class SendGridEmailProvider implements EmailProvider {
 
         boolean isSuccess = response.getStatusLine().getStatusCode() == HttpStatus.SC_ACCEPTED;
 
-        log.info("Status: {}. SendGrip API send status: {}", response.getStatusLine(), isSuccess);
+        log.info("Resource: {} | Status: {}. SendGrip API send status: {}", email.getId(), response.getStatusLine(), isSuccess);
 
         return isSuccess;
     }

@@ -62,7 +62,6 @@ public class MailProcessorTest {
         // assert
         assertThat(output.getResource(), nullValue());
         assertThat(output.getErrors().isEmpty(), equalTo(false));
-        assertThat(output.getErrors(), hasItem(("has violationA")));
         verify(mailDeliveryService, times(0)).send(input);
     }
 

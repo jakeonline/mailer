@@ -12,17 +12,21 @@ import java.util.List;
 @AllArgsConstructor
 public class EmailDetails {
 
-    @Email(message = "{user.email.invalid}")
+    public static final String MSG_EMAIL_INVALID = "Email ${validatedValue} is invalid";
+
+    Long id;
+
+    @Email(message = MSG_EMAIL_INVALID)
     String from;
 
     @Singular("to")
-    List<@Email(message = "{user.email.invalid}")  String> to;
+    List<@Email(message = MSG_EMAIL_INVALID)  String> to;
 
     @Singular("cc")
-    List<@Email(message = "{user.email.invalid}") String> cc;
+    List<@Email(message = MSG_EMAIL_INVALID) String> cc;
 
     @Singular("bcc")
-    List<@Email(message = "{user.email.invalid}") String> bcc;
+    List<@Email(message = MSG_EMAIL_INVALID) String> bcc;
 
     String body;
 

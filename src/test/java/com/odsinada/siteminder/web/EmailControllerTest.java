@@ -72,7 +72,7 @@ public class EmailControllerTest {
 
         // assert
         assertThat(emailSummaryDTO.getStatusCode(), equalTo(HttpStatus.BAD_REQUEST));
-        assertThat(emailSummaryDTO.getBody().getSelf(), nullValue());
+        assertThat(emailSummaryDTO.getBody().getSelf(), emptyString());
         assertThat(emailSummaryDTO.getBody().getErrors(), is(not(empty())));
     }
 
@@ -80,7 +80,6 @@ public class EmailControllerTest {
     public void shouldNotSendMailAndReturnBadGatewayStatus() throws URISyntaxException {
         // arrange
         when(processor.process(any())).thenReturn(output);
-        when(output.getResource()).thenReturn(resourceUrl);
 
         List<String> failures = Arrays.asList("Failure 1");
         when(output.getFailures()).thenReturn(failures);
@@ -90,7 +89,7 @@ public class EmailControllerTest {
 
         // assert
         assertThat(emailSummaryDTO.getStatusCode(), equalTo(HttpStatus.BAD_GATEWAY));
-        assertThat(emailSummaryDTO.getBody().getSelf(), equalTo(API_CONTEXT + resourceUrl));
+        assertThat(emailSummaryDTO.getBody().getSelf(), emptyString());
         assertThat(emailSummaryDTO.getBody().getErrors(), is(empty()));
     }
 

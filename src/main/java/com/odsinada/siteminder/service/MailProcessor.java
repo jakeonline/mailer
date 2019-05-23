@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class MailProcessor {
@@ -27,26 +24,17 @@ public class MailProcessor {
 
         Set<ConstraintViolation<EmailDetails>> violations = validator.validate(input);
         if (!violations.isEmpty()) {
-            violations.forEach((viol) -> output.getErrors().add(viol.getMessage()));
+            violations.forEach((viol) -> output.getErrors().add(viol.getMessage() + "|" + viol.getPropertyPath()));
         } else {
             try {
                 mailDeliveryService.send(input);
             } catch (MailDeliveryException mde) {
                 output.getFailures().add(MSG_FAILED_SENDING_EMAIL);
             }
-            output.setResource(createUniqueResource());
+            output.setResource(input.getId().toString());
         }
 
         return output;
-    }
-
-    private String createUniqueResource() {
-        LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-
-        int randomNum = ThreadLocalRandom.current().nextInt(1, 100 + 1);
-
-        return dateTime.format(formatter) + randomNum;
     }
 
 }

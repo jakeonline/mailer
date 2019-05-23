@@ -27,7 +27,7 @@ public class MailGunEmailProvider implements EmailProvider {
     public static final String FIELD_BCC = "bcc";
     public static final String FIELD_SUBJECT = "subject";
     public static final String FIELD_TEXT = "text";
-    private static final String MAILGUN_URL = "https://api.mailgun.net/v3/sandbox16ae66a08f7b486eb121269181144231.mailgun.org/messages";
+    private static final String MAILGUN_URL = "https://api.mailgun.net/v3/sandbox16ae66a08f7b486eb121269181144231.mailgun.org/errors";
 
     @Override
     public boolean send(EmailDetails email) {
@@ -43,7 +43,7 @@ public class MailGunEmailProvider implements EmailProvider {
 
         boolean isSuccess = response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
 
-        log.info("Status: {}. Mailgun API send status: {}", response.getStatusLine(), isSuccess);
+        log.info("Resource: {} | Status: {}. Mailgun API send status: {}", email.getId(), response.getStatusLine(), isSuccess);
 
         return isSuccess;
     }

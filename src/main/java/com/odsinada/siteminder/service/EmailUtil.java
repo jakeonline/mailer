@@ -6,9 +6,12 @@ import org.apache.http.NameValuePair;
 import org.apache.http.entity.ContentType;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class EmailUtil {
 
@@ -58,6 +61,7 @@ public class EmailUtil {
 
     public static EmailDetails toEntity(EmailDTO emailDTO) {
         EmailDetails emailDetails = new EmailDetails();
+        emailDetails.setId(createUniqueResource());
         emailDetails.setFrom(emailDTO.getFrom());
         emailDetails.setTo(emailDTO.getTo());
         emailDetails.setCc(emailDTO.getCc());
@@ -65,5 +69,14 @@ public class EmailUtil {
         emailDetails.setSubject(emailDTO.getSubject());
         emailDetails.setBody(emailDTO.getBody());
         return emailDetails;
+    }
+
+    private static Long createUniqueResource() {
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 100 + 1);
+
+        return Long.valueOf(dateTime.format(formatter) + randomNum);
     }
 }
