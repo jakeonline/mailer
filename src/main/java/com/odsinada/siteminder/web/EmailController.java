@@ -29,6 +29,8 @@ public class EmailController {
                 .to(Arrays.asList("john@doe.com", "jane@doe.com"))
                 .cc(Arrays.asList("peter@smith.com", "lisa@smith.com"))
                 .bcc(Arrays.asList("james@jones.com", "holly@jones.com"))
+                .subject("Greetings!")
+                .body("Hello World.")
                 .build();
 
         return ResponseEntity.ok(emailDTO);

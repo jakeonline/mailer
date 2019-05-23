@@ -21,7 +21,7 @@ public class MailGunEmailProviderIT {
     public void shouldSendMail() {
         // arrange
         EmailDetails email = EmailDetails.builder()
-                .from("MailGun <mailgun@sandbox16ae66a08f7b486eb121269181144231.mailgun.org>")
+                .from("jacob@odsinada.com")
                 .to("jacob@odsinada.com")
                 .to("abigail@odsinada.com")
                 .cc("jake@odsinada.com")
