@@ -13,9 +13,9 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RankedProviderDeliveryServiceTest {
+public class ShuffledProviderDeliveryServiceTest {
 
-    private RankedProviderDeliveryService service;
+    private ShuffledProviderDeliveryService service;
     private EmailDetails email;
 
     @Mock
@@ -24,11 +24,17 @@ public class RankedProviderDeliveryServiceTest {
     @Before
     public void setup() {
         List<EmailProvider> providers = Arrays.asList(providerA, providerB, providerC);
-        service = new RankedProviderDeliveryService(providers);
+        service = new ShuffledProviderDeliveryService(providers){
+            @Override
+            protected void shuffle(List<EmailProvider> emailProviders) {
+                // bypass shuffling for unit testing
+            }
+
+        };
     }
 
     @Test
-    public void shouldSendMailOnPrimaryProvider() throws MailDeliveryException {
+    public void shouldSendMailOnInitialProvider() throws MailDeliveryException {
         // arrange
         when(providerA.send(email)).thenReturn(true);
 
@@ -42,7 +48,7 @@ public class RankedProviderDeliveryServiceTest {
     }
 
     @Test
-    public void shouldSendMailOnNonPrimaryProvider() throws MailDeliveryException {
+    public void shouldSendMailOnNonInitialProvider() throws MailDeliveryException {
         // arrange
         when(providerA.send(email)).thenReturn(false);
         when(providerB.send(email)).thenReturn(false);
