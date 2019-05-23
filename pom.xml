@@ -68,7 +68,6 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.2.3</version>
-      <scope>test</scope>
     </dependency>
 
 
@@ -125,9 +124,14 @@
   </dependencies>
 
   <build>
-    <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+            <mainClass>com.odsinada.siteminder.MailProcessorWebApplication</mainClass>
+          </configuration>
+        </plugin>
       </plugins>
-    </pluginManagement>
   </build>
 </project>
